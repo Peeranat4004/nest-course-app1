@@ -9,9 +9,13 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
+  // Static assets เช่น รูป
   app.useStaticAssets(join(__dirname, '..', 'public'));
+
+  // ตั้งค่าโฟลเดอร์ view
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
-  app.setViewEngine('hbs');
+
+  app.setViewEngine('hbs'); // ใช้ Handlebars
 
   await app.listen(process.env.PORT ?? 3000);
 }

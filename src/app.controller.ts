@@ -1,24 +1,29 @@
 import { Controller, Get, Render } from '@nestjs/common';
-import { AppService } from './app.service';
+import { CustomerService } from './customer/customer.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly customerService: CustomerService) {}
 
-  @Get()
-  @Render('index')
-  getHello() {
-    // ส่งข้อมูลที่สามารถใช้ในเทมเพลตได้
-    return { message: this.appService.getHello() };
+  // ✅ หน้าแรก "/" แสดงหน้า profile พร้อมข้อมูล
+  @Get('')
+  @Render('index') // จะ render views/index.hbs
+  getHomePage() {
+    const profile = this.customerService.getProfile();
+    return {
+      message: 'My Profile',
+      ...profile,
+    };
   }
 
+  // ✅ ตัวอย่าง route อื่น (ยังคงไว้ได้ถ้าต้องการ)
   @Get('/showname')
   getName(): string {
-    return this.appService.getName();
+    return this.customerService.getProfile().name;
   }
 
   @Get('/showjson')
   getJson() {
-    return this.appService.getJson();
+    return this.customerService.getProfile();
   }
 }
