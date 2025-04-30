@@ -8,7 +8,7 @@ export class CustomerService {
 
   getProfile() {
     return {
-      name: 'Peeranat Chuenkeaw',
+      name: 'Patcharapong Pumimach',
       age: 22,
       email: 'aumusiclove123@gmail.com',
       bio: 'Digital Engineering',
